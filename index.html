@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Chats</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0b0f19;
+      color: white;
+      height: 100vh;
+    }
+
+    .app {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 18px;
+      text-align: center;
+      border-bottom: 1px solid #242a38;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    header span {
+      color: #6ea8ff;
+    }
+
+    .chat {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .welcome {
+      text-align: center;
+      margin-top: 25vh;
+    }
+
+    .welcome h1 {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .welcome p {
+      color: #aeb6c7;
+      margin-bottom: 25px;
+    }
+
+    .message {
+      max-width: 85%;
+      padding: 12px 15px;
+      margin: 10px 0;
+      border-radius: 15px;
+      line-height: 1.5;
+    }
+
+    .user {
+      background: #2563eb;
+      margin-left: auto;
+    }
+
+    .ai {
+      background: #1b2230;
+      margin-right: auto;
+    }
+
+    .input-area {
+      padding: 12px;
+      border-top: 1px solid #242a38;
+      display: flex;
+      gap: 8px;
+      background: #0b0f19;
+    }
+
+    input {
+      flex: 1;
+      padding: 14px;
+      border: 1px solid #30384a;
+      border-radius: 25px;
+      background: #151b27;
+      color: white;
+      outline: none;
+    }
+
+    button {
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      background: #2563eb;
+      color: white;
+      font-size: 18px;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <header>
+    ⚡ <span>Apex Chats</span>
+  </header>
+
+  <div class="chat" id="chat">
+
+    <div class="welcome" id="welcome">
+      <h1>Hi 👋</h1>
+      <p>Your AI Student Assistant</p>
+      <p>Ask me about studies, exams, doubts or career.</p>
+    </div>
+
+  </div>
+
+  <div class="input-area">
+    <input
+      id="messageInput"
+      type="text"
+      placeholder="Ask Apex Chats..."
+      onkeydown="if(event.key === 'Enter') sendMessage()"
+    >
+
+    <button onclick="sendMessage()">➤</button>
+  </div>
+
+</div>
+
+<script>
+
+function sendMessage() {
+
+  const input = document.getElementById("messageInput");
+  const chat = document.getElementById("chat");
+  const welcome = document.getElementById("welcome");
+
+  const message = input.value.trim();
+
+  if (message === "") return;
+
+  if (welcome) {
+    welcome.remove();
+  }
+
+  // User message
+  const userMessage = document.createElement("div");
+  userMessage.className = "message user";
+  userMessage.innerText = message;
+
+  chat.appendChild(userMessage);
+
+  input.value = "";
+
+  // Temporary AI response
+  setTimeout(() => {
+
+    const aiMessage = document.createElement("div");
+    aiMessage.className = "message ai";
+
+    aiMessage.innerText =
+      "I'm Apex Chats 🤖. AI connection abhi setup ho rahi hai. Jaldi hi main tumhare study doubts, exam planning aur career questions ka answer dunga.";
+
+    chat.appendChild(aiMessage);
+
+    chat
